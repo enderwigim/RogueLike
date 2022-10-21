@@ -1,8 +1,8 @@
 import tcod
 from input_handlers import EventHandler
 from engine import Engine
-from game_map import GameMap
 from entity import Entity
+from procgen import generate_dungeon
 
 def main() -> None:
     screen_width = 80
@@ -22,7 +22,7 @@ def main() -> None:
     npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), "@", (255, 255, 0))
     entities = {npc, player}
 
-    game_map = GameMap(map_width, map_height)
+    game_map = generate_dungeon(map_width, map_height)
     engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
 
     with tcod.context.new_terminal(
